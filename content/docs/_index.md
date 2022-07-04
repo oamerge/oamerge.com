@@ -1,9 +1,22 @@
 ---
 title: 'Overview'
-date: 2018-11-28T15:14:39+10:00
 weight: 1
 ---
 
-## Whisper Theme
+## OA Merge
 
-Whisper is a minimal documentation theme for Hugo. The design and functionality is intentionally minimal. We’re aiming for a similar feel to a Github readme.
+Merge and share OpenAPI endpoints and schemas.
+
+Install it the normal way:
+
+```bash
+npm install oamerge
+```
+
+Point it at a folder to build:
+
+```bash
+oamerge --input ./folder --output ./build
+```
+
+In development mode, use `--watch` (or `-w`) to rebuild when changes are detected.
