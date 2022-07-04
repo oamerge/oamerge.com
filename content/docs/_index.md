@@ -7,7 +7,7 @@ weight: 1
 
 Merge and share OpenAPI endpoints and schemas.
 
-Install it the normal way:
+Install it the normal way [from npm](https://www.npmjs.com/package/oamerge):
 
 ```bash
 npm install oamerge
