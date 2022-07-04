@@ -106,7 +106,26 @@ curl http://localhost:3030/hello
 # Hello world!
 ```
 
-For further reading, have a look at any of the documentation pages.
+If you look at the `build/openapi.json` file, it'll look something like this:
+
+```json
+{
+	"openapi": "3.1.0",
+	"info": {
+		"title": "My Cool API",
+		"version": "0.0.0"
+	},
+	"paths": {
+		"/hello": {
+			"get": {
+				"summary": "Endpoint to make sure the API works."
+			}
+		}
+	}
+}
+```
+
+For further reading on configuration and output options, have a look at any of the documentation pages.
 
 > ℹ️ If you want to play with this example more, please note that Polka uses `/:userId` path notation whereas OpenAPI uses `/{userId}` path notation. In most cases you can do a simple regex replace:
 > 
