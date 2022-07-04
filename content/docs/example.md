@@ -82,20 +82,28 @@ npx oamerge -c
 
 > ℹ️ If you're following along locally, be sure to have a look at the output files in the `build` folder!
 
-Now to run the server with routing, let's use [Polka](https://github.com/lukeed/polka), a really lightweight router that's a lot like Express or Koa.
-
-The generated list of routes will be in the build folder, as the `routes.js` file, so we can import that to add all routes at once.
+For this example we don't have path parameters, so we can make a very rudimentary router and HTTP server:
 
 ```js
-// server.js
-import polka from 'polka'
+// create a map of path->method->handler
 import { routes } from './build/routes.js'
-const server = polka()
-for (const { method, path, handler } of routes) {
-	server[method](path, handler)
+const simpleRouter = {}
+for (const { path, method, handler } of routes) {
+	if (!simpleRouter[path]) simpleRouter[path] = {}
+	simpleRouter[path][method.toUpperCase()] = handler
 }
-server.listen(3030, () => {
-	console.log('Server running at: http://localhost:3030')
+// now create the HTTP server
+import { createServer } from 'node:http'
+const server = createServer((request, response) => {
+	const handler = simpleRouter[request.url]?.[request.method]
+	if (handler) handler(request, response)
+	else {
+		response.statusCode = 200
+		response.end('No route found!')
+	}
+})
+server.listen(3000, () => {
+	console.log('Listening: http://localhost:3000')
 })
 ```
 
@@ -127,9 +135,4 @@ If you look at the `build/openapi.json` file, it'll look something like this:
 
 For further reading on configuration and output options, have a look at any of the documentation pages.
 
-> ℹ️ If you want to play with this example more, please note that Polka uses `/:userId` path notation whereas OpenAPI uses `/{userId}` path notation. In most cases you can do a simple regex replace:
-> 
-> ```diff
-> -	server[method](path, handler)
-> +	server[method](path.replace(/\{([^}]+)\}/g, ':$1'), handler)
-> ```
+If you want a more complete walk-through, have a look at the [advanced tutorial](/docs/tutorial).
