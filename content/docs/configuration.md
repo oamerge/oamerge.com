@@ -18,6 +18,9 @@ The file needs to `export default` a configuration object:
 export default {
 	input: [ './folder' ],
 	output: './build',
+	options: {
+		// ...
+	},
 }
 ```
 
@@ -89,5 +92,31 @@ export default {
 
 Available output options (each value must be a filepath):
 
+* [`json`](/docs/json) - The merged OpenAPI schema, output as a JSON file.
 * [`routes`](/docs/routes) - The array of path and request handler exports.
 * [`schema`](/docs/schema) - The merged OpenAPI schema file.
+
+## Options
+
+The `options` property is used to modify the outputs. It is a map of output-option keys to configuration objects, each output has its own options.
+
+```js
+export default {
+	// ...
+	options: {
+		json: {
+			// ...
+		},
+		routes: {
+			// ...
+		},
+		schema: {
+			// ...
+		},
+	}
+}
+```
+
+The available options for each build output are:
+
+* `json.compact: Boolean` - If this options is specified, all non-required labels and descriptions will be removed.
