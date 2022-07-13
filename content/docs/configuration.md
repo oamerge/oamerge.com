@@ -59,7 +59,7 @@ export default {
 }
 ```
 
-The order of the input elements determines which properties will override others. Look at [the page on "Merging"](/docs/merging) for more details.
+The order of the input elements determines which properties will override others. Look at the page for each output for more details.
 
 The properties on the input object are:
 
@@ -94,11 +94,12 @@ Available output options (each value must be a filepath):
 
 * [`json`](/docs/json) - The merged OpenAPI schema, output as a JSON file.
 * [`routes`](/docs/routes) - The array of path and request handler exports.
+* [`security`](/docs/security) - The map of security names to security handler exports.
 * [`schema`](/docs/schema) - The merged OpenAPI schema file.
 
 ## Options
 
-The `options` property is used to modify the outputs. It is a map of output-option keys to configuration objects, each output has its own options.
+The `options` property is used to modify each output. It is a map of output-option keys to configuration objects, each output has its own options.
 
 ```js
 export default {
@@ -110,6 +111,9 @@ export default {
 		routes: {
 			// ...
 		},
+		security: {
+			// ...
+		},
 		schema: {
 			// ...
 		},
@@ -117,6 +121,8 @@ export default {
 }
 ```
 
-The available options for each build output are:
+The available options for each build output are defined more completely in each build documentation page, but for reference they are:
 
-* `json.compact: Boolean` - If this options is specified, all non-required labels and descriptions will be removed.
+* `json.compact: Boolean` - If this options is specified, all non-required labels and descriptions will be removed from the JSON.
+* `schema.compact: Boolean` - If this options is specified, all non-required labels and descriptions will not be imported.
+* [`security.merge: Function`](/docs/security#custom-merge) - An optional function to change the merging strategy for security scheme handlers.
