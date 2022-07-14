@@ -47,16 +47,29 @@ However, like Operation Objects that export a default function as the request ha
 // components/securitySchemes/actualScheme.@.js
 export const type = 'http'
 export const scheme = 'basic'
-export default () => {
-	// TODO
+export default (request, response) => {
+	// Check for headers etc.
 }
 ```
 
-Also like the request handler functions, OA Merge does not have an opinion about how you write your security code.
+Although the `request, response` signature is common, like the request handler functions OA Merge does *not* have an opinion about how you write your security handler function.
+
+## Output
+
+The output of the `security` builds and exports a map of security scheme names to handler functions, resolving all `$ref` references. For example:
+
+```js
+import handler_1 from 'my_api/components/securitySchemes/thing_1.@.j1'
+export const security = {
+	thing_1: handler_1,
+	// a resolved reference
+	thing_2: handler_1
+}
+```
 
 ## Merging Strategy
 
-The default merge strategy is to take each input as ordered, writing the name to a map and overwriting whatever is there, whether function or reference. At the end, references are resolved so that the exported `security` object points directly to the exported handler.
+The default merge strategy is to take each input as ordered, writing the name to a map and overwriting whatever is there, whether function or reference. References are resolved *at the end* so that the exported `security` object points directly to the exported handler.
 
 For example, suppose that there are two input folders, with files like this:
 
@@ -80,30 +93,29 @@ For example, suppose that there are two input folders, with files like this:
 If the input order was `api_1, api_2` than the output `security` file would look something like this:
 
 ```js
-import name_1 from 'api_1/components/securitySchemes/name_1.@.js'
-import name_2 from 'api_2/components/securitySchemes/name_2.@.js'
+import handler_1 from 'api_1/components/securitySchemes/name_1.@.js'
+import handler_2 from 'api_2/components/securitySchemes/name_2.@.js'
 export const security = {
-	name_1,
-	name_2,
-	name_3: name_1
+	name_1: handler_1,
+	name_2: handler_2,
+	name_3: handler_1,
 }
 ```
 
-Whereas if the input order was `api_2, api_1` than the output would be:
+Whereas if the input order was `api_2, api_1` the output would be:
 
 ```js
-import name_1 from 'api_1/components/securitySchemes/name_1.@.js'
-import name_2 from 'api_2/components/securitySchemes/name_2.@.js'
+import handler_1 from 'api_1/components/securitySchemes/name_1.@.js'
 export const security = {
-	name_1,
-	name_2: name_1,
-	name_3: name_1
+	name_1: handler_1,
+	name_2: handler_1,
+	name_3: handler_1,
 }
 ```
 
 ## Custom Merge
 
-You can define a custom merge function in your configuration file, like this:
+You can also define a custom merge function in your configuration file, like this:
 
 ```js
 export default {
