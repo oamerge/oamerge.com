@@ -6,6 +6,8 @@ Write models and request handlers that you can share with your team or with the 
 
 Use your well-crafted OpenAPI models to drive type checking in your IDE. ***Incredible!***
 
+# STILL IN ROUGH DRAFT
+
 <!--
 Validate and cast requests, using only the code you need. ***Astonishing!***
 -->
