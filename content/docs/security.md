@@ -56,7 +56,7 @@ Although the `request, response` signature is common, like the request handler f
 
 ## Output
 
-The output of the `security` builds and exports a map of security scheme names to handler functions, resolving all `$ref` references. For example:
+The output of `security` builds and exports a map of security scheme names to handler functions, resolving all `$ref` references. For example:
 
 ```js
 import handler_1 from 'my_api/components/securitySchemes/thing_1.@.j1'
