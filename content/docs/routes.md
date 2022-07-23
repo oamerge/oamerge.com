@@ -240,29 +240,32 @@ The `list` property is an array of objects containing the following properties:
 * `dir: String` - The full directory of the file, e.g. `/path/to/api`
 * `filepath: String` - The filepath within the directory, e.g. `paths/users/{userId}/get.@.js`
 * `handler: Boolean` - Will be `true` if there is an exported handler function.
+* `name: string` - This would be either the method, e.g. `get`, or the underscore `_` string.
+* `path: string` - The folder-based OpenAPI path, like `/users/{userId}`. If any `_` file within the path has a `$path` export it'll be that rename instead.
 * `reference?: String` - If present, the `$ref` string value.
 
-
-
-
-
-
-
-
-
-
-TODO
-
-
-
-What you need to return is a map where the name is the final security scheme name, and the value is an object containing the following properties:
+What you need to return is a deep map where the name is the final OpenAPI path, like `/tasks/{taskId}`, and the value is an object where the key is the valid OpenAPI method name, e.g. `get` or `post` and so on, and that is an object containing the following properties:
 
 * `dir: String` - The full directory of the file, e.g. `/path/to/api`
 * `filepath: String` - The filepath within the directory, e.g. `components/securitySchemes/token.@.js`
 
 All references must be fully resolved in the output map.
 
-You technically don't even need to use anything from the provided list, for example if you want to overwrite all security schemes:
+The output should look something like this:
+
+```js
+const output = {
+	'/task': {
+		get: { dir, filepath },
+		post: { dir, filepath },
+	},
+	'/tasks/{taskId}': {
+		get: { dir, filepath },
+	}
+}
+```
+
+You technically don't even need to use anything from the provided list, for example if you want to overwrite all routes:
 
 ```js
 export default {
@@ -272,9 +275,11 @@ export default {
 		security: {
 			merge: () => {
 				return {
-					my_only_scheme: {
-						dir: '/somewhere/else',
-						filepath: 'some/other/file/entirely.js'
+					'/hello': {
+						get: {
+							dir: '/somewhere/else',
+							filepath: 'some/other/file/entirely.js'
+						}
 					}
 				}
 			}
