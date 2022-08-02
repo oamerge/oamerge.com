@@ -34,7 +34,7 @@ summaryLength = 30
   homepage_image = '/images/terminal.gif'
 
   ## You can enable to add anchor links to header elements
-  # enable_anchor_link = true
+  enable_anchor_link = true
 
   [params.homepage_meta_tags]
     meta_description = "OA Merge is a tool to help you merge and share API endpoints and OpenAPI schemas."
