@@ -54,6 +54,55 @@ export default (request, response) => {
 
 Although the `request, response` signature is common, like the request handler functions OA Merge does *not* have an opinion about how you write your security handler function.
 
+## Reserved Keyword: `in`
+
+The OpenAPI specs define the property name `in`, for example:
+
+```json
+{
+	"components": {
+		"securitySchemes": {
+			"token": {
+				"type": "apiKey",
+				"name": "PHP_SESSION",
+				"in": "cookie"
+			}
+		}
+	}
+}
+```
+
+Since this is a JavaScript reserved keyword, you can't export it directly:
+
+```js
+// this won't work
+export const in = 'cookie'
+```
+
+One way you can achieve this is by using renamed exports, like this:
+
+```js
+// this will work
+const _in = 'cookie'
+export { _in as in }
+```
+
+This is valid JavaScript, but it can feel a little clunky, so OA Merge supports exporting `$in` as an alternative:
+
+```js
+// this will remap to `in`
+export const $in = 'cookie'
+```
+
+If you try to export both, OA Merge will throw an error:
+
+```js
+// this is valid JavaScript, but the compiler will throw an error
+const _in = 'cookie'
+export { _in as in }
+export const $in = 'cookie'
+```
+
 ## Output
 
 The output of `security` builds and exports a map of security scheme names to handler functions, resolving all `$ref` references. For example:
