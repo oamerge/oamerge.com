@@ -52,7 +52,9 @@ export default (request, response) => {
 }
 ```
 
-Although the `request, response` signature is common, like the request handler functions OA Merge does *not* have an opinion about how you write your security handler function.
+Note: Although the `request, response` signature is common, like the request handler functions OA Merge does *not* have an opinion about how you write your security handler function.
+
+The file name, in this case `actualScheme.@.js` is used to derive the `name` property used by OpenAPI, in this case the `name` would be `actualScheme`. Exporting a `name` property from the file is currently not valid, and will throw an error.
 
 ## Reserved Keyword: `in`
 
