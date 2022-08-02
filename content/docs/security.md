@@ -89,7 +89,7 @@ const _in = 'cookie'
 export { _in as in }
 ```
 
-This is valid JavaScript, but it can feel a little clunky, so OA Merge supports exporting `$in` as an alternative:
+Although that is valid JavaScript, it can feel a little clunky, so OA Merge supports exporting `$in` as an alternative:
 
 ```js
 // this will remap to `in`

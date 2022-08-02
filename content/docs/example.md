@@ -59,7 +59,7 @@ To override the `info.title` in `api_2` we'll export it in the `api_2/info.@.js`
 
 ```js
 // api_2/info.@.js
-export const title 'My Even Cooler API'
+export const title = 'My Even Cooler API'
 ```
 
 Since the `config.oamerge.js` specifies `api_2` as the last input, the `info.title` will be overridden by that.
