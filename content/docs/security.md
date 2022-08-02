@@ -54,7 +54,7 @@ export default (request, response) => {
 
 Note: Although the `request, response` signature is common, like the request handler functions OA Merge does *not* have an opinion about how you write your security handler function.
 
-The file name, in this case `actualScheme.@.js` is used to derive the `name` property used by OpenAPI, in this case the `name` would be `actualScheme`. Exporting a `name` property from the file is currently not valid, and will throw an error.
+The file name, in this case `actualScheme.@.js` is used to derive the OpenAPI `securitySchemes` key, which would be `actualScheme` in this case. That key is used inside Operation Object `security` lists. The `name` exported from a Security Scheme file is the header, cookie, or query parameter name.
 
 ## Reserved Keyword: `in`
 
