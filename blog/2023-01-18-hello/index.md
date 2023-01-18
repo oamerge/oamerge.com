@@ -62,7 +62,7 @@ Since being introduced to the magic and power of the OpenAPI specs years ago (ba
 
 I'm a firm believer that, over time, building and learning tools based on mature specifications becomes a *compounding knowledge interest* across all applications: less groping around in the dark to understand new concepts, less rewriting from scratch when you build a new application, and a healthier development cycle for existing applications.
 
-## Introducing OpenAPI Merge / OA Merge / `oamerge`
+## Introducing OA Merge
 
 After ten years of building new things and maintaining old things I wrote years ago, I feel ready to start taking all those lessons-learned and best-practices that I've developed and turn them into useful tools.
 

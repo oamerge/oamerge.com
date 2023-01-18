@@ -43,7 +43,7 @@
 }
 .tinyletter input {
 	font-size: 1.1em;
-	padding: 0.5em 4em;
+	padding: 0.5em 1em;
 	border-radius: 5px;
 	border: 1px solid var(--ifm-color-primary-dark);
 	width: 18em;
