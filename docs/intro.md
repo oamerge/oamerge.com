@@ -2,46 +2,95 @@
 sidebar_position: 1
 ---
 
-# Tutorial Intro
+# Intro to OA Merge
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Let's discover **OA Merge in less than 5 minutes**.
 
-## Getting Started
+## What you'll need
 
-Get started by **creating a new site**.
+[Node.js](https://nodejs.org/en/download/) version 16.14 or above.
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Initialize the Project
 
-### What you'll need
-
-- [Node.js](https://nodejs.org/en/download/) version 16.14 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
-
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
+Create a new directory and initialize `npm`:
 
 ```bash
-npm init docusaurus@latest my-website classic
+mkdir my-api
+cd my-api
+npm init -y
 ```
 
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+Install dependencies:
 
 ```bash
-cd my-website
-npm run start
+npm install --save-dev oamerge @oamerge/generator-routes
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+- `oamerge` - The core CLI.
+- `@oamerge/generator-routes` - OA Merge is a plugin-based system, this one generates output for routers.
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+## Create your API
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+Add an API endpoint for `GET /hello` by adding the file `api/paths/hello/get.@.js` with this:
+
+```js
+export const summary = 'Says Hello'
+export const description = 'Simple example using the NodeJS http request/response model.'
+export default async (request, response) => {
+	response.statusCode = 200
+	response.setHeader('Content-Type', 'text/plain')
+	response.end('Hello World!')
+}
+```
+
+## Configure OA Merge
+
+Add a configuration file `oamerge.config.js` with this:
+
+```js
+import routes from '@oamerge/generator-routes'
+export default {
+	input: './api',
+	output: './build',
+	generators: [
+		routes(),
+	],
+}
+```
+
+And to your `package.json` file, add a run script for building:
+
+```json
+{
+	"scripts": {
+		"run": "oamerge -c"
+	}
+}
+```
+
+## Run the Server
+
+OA Merge *does not* have opinions about how you handle requests, but in this demo we're using `@oamerge/dev-nodejs-http` which
+is a simple implementation using [NodeJS `createServer`](https://nodejs.org/api/http.html#httpcreateserveroptions-requestlistener).
+
+Add a file `server.js` and put in it:
+
+```js
+import { createServer } from 'node:http'
+import { routes } from './build/routes.js'
+
+const server = createServer((request, response) => {
+	// a very rudimentary router, as OA Merge does not ship one, on purpose!
+	for (const { path, method, handler } of routes) {
+		if (request.url === path && request.method.toLowerCase() === method) {
+			return handler(request, response)
+		}
+	}
+})
+
+server.listen(3000, '127.0.0.1', () => {
+	console.log('Server running!')
+})
+```
+
+Now open up [`http://127.0.0.1:3000/hello`](http://127.0.0.1:3000/hello) to see the server response.
