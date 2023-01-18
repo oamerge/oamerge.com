@@ -28,3 +28,38 @@
   --ifm-color-primary-lightest: #a8c5ec;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+/* Stuff to make embedded TinyLetter forms look better */
+.tinyletter {
+	max-width: 32em;
+	margin: 0 auto;
+	border: 1px solid var(--ifm-color-primary);
+	border-radius: 5px;
+	padding: 1em 4em;
+	text-align: center;
+}
+.tinyletter label {
+	display: block;
+}
+.tinyletter input {
+	font-size: 1.1em;
+	padding: 0.5em 4em;
+	border-radius: 5px;
+	border: 1px solid var(--ifm-color-primary-dark);
+	width: 18em;
+}
+.tinyletter button {
+	background-color: var(--ifm-color-primary-lightest);
+	border: 1px solid var(--ifm-color-primary-darkest);
+	color: var(--ifm-color-primary-darkest);
+	font-family: var(--ifm-font-family-base);
+	font-size: 1.1em;
+	border-radius: 5px;
+	padding: 0.5em 4em;
+	width: 18em;
+}
+.tinyletter .power {
+	margin-bottom: 0;
+	margin-top: 1.4em;
+	font-size: 0.8em;
+}

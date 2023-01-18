@@ -93,3 +93,28 @@ More importantly, I want to start using my lessons-learned with some new project
 The first generator is [`@oamerge/generator-routes`](/docs/generators/routes) which turns an OpenAPI folder into a list of routes to pass to things like Express or Polka.
 
 I have a few more already in the works that handle security, generating an OpenAPI JSON/YAML document, and schema validation. They might be a while, but I've written them many times already, so I feel pretty good about applying best-practices to those.
+
+If you want to follow along, I started a newsletter with TinyHeart for my "official super serious business" [Tobias Labs](https://tobiaslabs.com), and I'll try to send out major news updates on it:
+
+<form
+	class="tinyletter"
+	action="https://tinyletter.com/tobiaslabs"
+	method="post"
+	target="popupwindow"
+	onsubmit="window.open('https://tinyletter.com/tobiaslabs', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
+>
+	<p>
+		Would you like to get major news updates for Tobias Labs projects (OA Merge and <a href="https://hunchjs.com">HunchJS</a>).
+	</p>
+	<p>
+		<label for="tlemail">
+			Email Address
+		</label>
+		<input type="text" name="email" id="tlemail" />
+	</p>
+	<input type="hidden" value="1" name="embed"/>
+	<button type="submit">Subscribe</button>
+	<p class="power">
+		<a href="https://tinyletter.com" target="_blank">powered by TinyLetter</a>
+	</p>
+</form>
