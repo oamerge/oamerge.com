@@ -1,0 +1,65 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #05a;
+  --ifm-color-primary-dark: #07519d;
+  --ifm-color-primary-darker: #0d4583;
+  --ifm-color-primary-darkest: #12396b;
+  --ifm-color-primary-light: #0d66c4;
+  --ifm-color-primary-lighter: #247eda;
+  --ifm-color-primary-lightest: #4c99ec;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #0d66c4;
+  --ifm-color-primary-dark: #195494;
+  --ifm-color-primary-darker: #1660b2;
+  --ifm-color-primary-darkest: #0d66c4;
+  --ifm-color-primary-light: #2678d7;
+  --ifm-color-primary-lighter: #669ce5;
+  --ifm-color-primary-lightest: #a8c5ec;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Stuff to make embedded TinyLetter forms look better */
+.tinyletter {
+	max-width: 32em;
+	margin: 0 auto;
+	border: 1px solid var(--ifm-color-primary);
+	border-radius: 5px;
+	padding: 1em 4em;
+	text-align: center;
+}
+.tinyletter label {
+	display: block;
+}
+.tinyletter input {
+	font-size: 1.1em;
+	padding: 0.5em 1em;
+	border-radius: 5px;
+	border: 1px solid var(--ifm-color-primary-dark);
+	width: 18em;
+}
+.tinyletter button {
+	background-color: var(--ifm-color-primary-lightest);
+	border: 1px solid var(--ifm-color-primary-darkest);
+	color: var(--ifm-color-primary-darkest);
+	font-family: var(--ifm-font-family-base);
+	font-size: 1.1em;
+	border-radius: 5px;
+	padding: 0.5em 4em;
+	width: 18em;
+}
+.tinyletter .power {
+	margin-bottom: 0;
+	margin-top: 1.4em;
+	font-size: 0.8em;
+}
