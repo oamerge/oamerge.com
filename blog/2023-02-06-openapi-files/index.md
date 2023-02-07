@@ -622,7 +622,18 @@ For most APIs, we can make use of the following tools to define paths:
 	* If the `_path` is the boolean `true`, the folder names are used for the path name, but
 	* If the `_path` is a string, that is used for the OpenAPI path key, e.g. mapping the folder `paths/users/[userId]` to `"/users/{userId}"`
 
-Where ambiguity may exist, the API developer has the following options:
+This will work fine, so long as your API path URL doesn't have the following folder names:
+
+* `$ref`
+* `description`
+* `parameters`
+* `servers`
+* `summary`
+* And then the HTTP method names: `get`, `put`, `post`, `delete`, `options`, `head`, `patch`, and `trace`.
+
+Where these are used, the possibility of ambiguity *may* exist, although not all of those can create ambiguous states.
+
+In those cases, the API developer has the following options:
 
 * Define those properties in the underscore file containing the `_path` marker, or
 * Split the API paths into multiple input folders to be merged together by OA Merge, or
